@@ -1,0 +1,70 @@
+module.exports = `
+  scalar DateTime
+
+  type Address {
+    streetName: String
+    streetNumber: String
+    zipCode: String
+    city: String
+    country: String
+  }
+
+  type Person {
+    nameFirst: String
+    nameLast: String!
+    contactPhone: String
+    contactMobile: String
+  }
+
+  type Customer {
+    id: ID!
+    person: Person!
+    address: Address!
+    plantId: Int!
+    isOperator: Boolean!
+    label: String!
+  }
+
+  type PriceSheet {
+    id: ID!
+    name: String!
+    startDate: DateTime!
+    endDate: DateTime!
+    basicPrice: Float!
+    energyPrice: Float!
+  }
+
+  type Tariff {
+    id: String!
+    nameExternal: String!
+    nameInternal: String!
+    tax: Boolean!
+    powerTax: Boolean!
+    validityStartDate: DateTime!
+    validityEndDate: DateTime!
+    priceSheets: [PriceSheet!]!
+    kind: String!
+  }
+
+  type ContractComponent {
+    id: ID!
+    startDate: String!
+    endDate: String
+    tariff: Tariff
+  }
+
+  type ContractMeter {
+    id: ID!
+    contractComponents: [ContractComponent!]!
+  }
+
+  type Contract {
+    id: ID!
+    label: String!
+    plantId: Int!
+    customer: Customer!
+    startDate: DateTime!
+    endDate: DateTime!
+    contractMeter: ContractMeter
+  }
+`;
